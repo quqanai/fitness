@@ -1,0 +1,19 @@
+version: "2.4"
+
+services:
+  app:
+    build: .
+    command: uvicorn code.main:app --host 0.0.0.0 --reload
+    volumes:
+      - .:/app
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@postgres:5432/postgres
+    ports:
+      - "8000:8000"
+
+  postgres:
+    image: postgres:alpine
+    environment:
+      POSTGRES_PASSWORD: postgres

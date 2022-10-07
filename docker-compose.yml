@@ -10,6 +10,7 @@ services:
       - postgres
     environment:
       DATABASE_URL: postgres://postgres:postgres@postgres:5432/postgres
+      SECRET_KEY: cd556488a2e354d6751a6ddd5cd299bcfb7e3ec6b106515f64a863d23119a230
     ports:
       - "8000:8000"
 

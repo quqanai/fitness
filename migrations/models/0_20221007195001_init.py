@@ -1,5 +1,9 @@
--- upgrade --
-CREATE TABLE IF NOT EXISTS "users" (
+from tortoise import BaseDBAsyncClient
+
+
+async def upgrade(db: BaseDBAsyncClient) -> str:
+    return """
+        CREATE TABLE IF NOT EXISTS "users" (
     "id" UUID NOT NULL  PRIMARY KEY,
     "email" VARCHAR(100) NOT NULL UNIQUE,
     "hashed_password" TEXT NOT NULL,
@@ -18,4 +22,9 @@ CREATE TABLE IF NOT EXISTS "aerich" (
     "version" VARCHAR(255) NOT NULL,
     "app" VARCHAR(100) NOT NULL,
     "content" JSONB NOT NULL
-);
+);"""
+
+
+async def downgrade(db: BaseDBAsyncClient) -> str:
+    return """
+        """
